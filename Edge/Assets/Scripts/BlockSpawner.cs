@@ -46,20 +46,17 @@ public class BlockSpawner : MonoBehaviour
 
     public void SpawnBlock()
     {
-        int nextBlock = currentBlock > 18 ? 1 : currentBlock + 2;
-        if(spawnLeft)
-        {
-            blockPrefabs[currentBlock + 2].transform.localScale = new Vector3(blockPrefabs[currentBlock].transform.localScale.z, blockPrefabs[currentBlock].transform.localScale.y, blockPrefabs[currentBlock].transform.localScale.x);
-        }
-        else
-        {
-            blockPrefabs[currentBlock + 2].transform.localScale = new Vector3(blockPrefabs[currentBlock].transform.localScale.z, blockPrefabs[currentBlock].transform.localScale.y, blockPrefabs[currentBlock].transform.localScale.x);
-        }
+        int nextBlock = (currentBlock + 2) % poolSize;
 
-        lastBlock = currentBlock + 2 > poolSize - 1 ? 0 : currentBlock;
-        currentBlock = currentBlock + 2 > poolSize - 1 ? 1 : currentBlock + 2;
-        hangingBlock = hangingBlock + 2 > poolSize - 2 ? 2 : hangingBlock + 2;
-        // spawnLeft = spawnLeft ? false : true;
+        blockPrefabs[nextBlock].transform.localScale = new Vector3(
+            blockPrefabs[currentBlock].transform.localScale.z,
+            blockPrefabs[currentBlock].transform.localScale.y,
+            blockPrefabs[currentBlock].transform.localScale.x);
+
+        int prevCurrent = currentBlock;                 // remember who was current
+        lastBlock = prevCurrent;                        // prevCurrent becomes "last"
+        currentBlock = nextBlock;                       // advance to the wrapped "next" block index
+        hangingBlock = (hangingBlock + 2) % poolSize;   // advance hanging safely
 
         if(spawnLeft) // Spawn the new block from the top left spawn point
         {
@@ -89,6 +86,6 @@ public class BlockSpawner : MonoBehaviour
     {
         rightSpawn.transform.position = new Vector3(blockPrefabs[currentBlock].transform.position.x + 3.0f, blockPrefabs[currentBlock].transform.position.y, blockPrefabs[currentBlock].transform.position.z);
         leftSpawn.transform.position = new Vector3(blockPrefabs[currentBlock].transform.position.x, blockPrefabs[currentBlock].transform.position.y, blockPrefabs[currentBlock].transform.position.z + 3.0f);
-        Debug.Log("Updating Spawners");
+        // Debug.Log("Updating Spawners");
     }
 }
