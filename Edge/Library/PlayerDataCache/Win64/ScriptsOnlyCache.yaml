@@ -51,11 +51,11 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 3552}
+      Script: {instanceID: 1510}
     - Class: 114
-      Script: {instanceID: 34226}
+      Script: {instanceID: 7844}
     - Class: 114
-      Script: {instanceID: 35488}
+      Script: {instanceID: 7848}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -63,6 +63,12 @@ ScriptsOnlyBuild:
     - Class: 196
       Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: 0d2dfdeec5588a846b6f08dfb544155d
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: GameManager
   - hash:
       serializedVersion: 2
       Hash: ba02f6305213799bc7d94f9583924efb
@@ -371,12 +377,6 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionExit2DMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 79868a6ee3f12bf4ef4859d20fe23dbc
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: BlockMovement
-  - hash:
-      serializedVersion: 2
       Hash: 0a3f328f3ea906bbbcf794f4c27ee59d
     assemblyName: Unity.VisualScripting.Flow
     namespaceName: Unity.VisualScripting
@@ -465,6 +465,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_SubMeshUI
+  - hash:
+      serializedVersion: 2
+      Hash: fbb8b36b57ee0419eb5baf4668ae3cb9
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: BlockManager
   - hash:
       serializedVersion: 2
       Hash: 9078325c2a6f6a2d9612ade897511860
@@ -905,23 +911,17 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 3be09e8a7e792b454336c2ad3784e170
+      Hash: e33571503854464608195b1cd86c580b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: BlockSpawner
   - hash:
       serializedVersion: 2
-      Hash: 0d2dfdeec5588a846b6f08dfb544155d
+      Hash: 562b117cc5dc0256d8619556211eca7f
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: GameManager
-  - hash:
-      serializedVersion: 2
-      Hash: fbb8b36b57ee0419eb5baf4668ae3cb9
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: BlockManager
+    className: BlockMovement
   platform: 19
   scenePathNames:
   - Assets/Scenes/PlayScreen.unity
-  playerPath: D:/Game Development/Edge Deployment Builds/Edge.exe
+  playerPath: D:/Game Development/Edge Deployment Builds/Build 0.2/Edge.exe

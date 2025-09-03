@@ -15,7 +15,7 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] public int lastBlock;
     [SerializeField] public int hangingBlock;
 
-    private bool spawnLeft = true;
+    public bool spawnLeft = true;
 
     private void Start()
     {
@@ -46,27 +46,35 @@ public class BlockSpawner : MonoBehaviour
 
     public void SpawnBlock()
     {
-        int nextBlock = currentBlock > 18 ? 1 : currentBlock + 3;
-        blockPrefabs[currentBlock + 3].transform.localScale = blockPrefabs[currentBlock].transform.localScale;
+        int nextBlock = currentBlock > 18 ? 1 : currentBlock + 2;
+        if(spawnLeft)
+        {
+            blockPrefabs[currentBlock + 2].transform.localScale = new Vector3(blockPrefabs[currentBlock].transform.localScale.z, blockPrefabs[currentBlock].transform.localScale.y, blockPrefabs[currentBlock].transform.localScale.x);
+        }
+        else
+        {
+            blockPrefabs[currentBlock + 2].transform.localScale = new Vector3(blockPrefabs[currentBlock].transform.localScale.z, blockPrefabs[currentBlock].transform.localScale.y, blockPrefabs[currentBlock].transform.localScale.x);
+        }
 
         lastBlock = currentBlock + 2 > poolSize - 1 ? 0 : currentBlock;
         currentBlock = currentBlock + 2 > poolSize - 1 ? 1 : currentBlock + 2;
         hangingBlock = hangingBlock + 2 > poolSize - 2 ? 2 : hangingBlock + 2;
         // spawnLeft = spawnLeft ? false : true;
 
-        if(spawnLeft)
+        if(spawnLeft) // Spawn the new block from the top left spawn point
         {
             blockPrefabs[currentBlock].transform.position = leftSpawn.transform.position + new Vector3(0f, 0.2f, 0f);
-            leftSpawn.transform.position += new Vector3(0f, 0.2f, 0f);
-            rightSpawn.transform.position += new Vector3(0f, 0.2f, 0f);
+            rightSpawn.transform.position = new Vector3(blockPrefabs[lastBlock].transform.position.x + 3.0f, blockPrefabs[lastBlock].transform.position.y + 0.2f, blockPrefabs[lastBlock].transform.position.z);
             blockPrefabs[currentBlock].transform.rotation = Quaternion.Euler(0, 180, 0);
+
+            // Debug.Log("Spawning Left");
         }
-        else
+        else // Spawn the new block from the top right spawn point
         {
             blockPrefabs[currentBlock].transform.position = rightSpawn.transform.position + new Vector3(0f, 0.2f, 0f);
-            leftSpawn.transform.position += new Vector3(0f, 0.2f, 0f);
-            rightSpawn.transform.position += new Vector3(0f, 0.2f, 0f);
-            blockPrefabs[currentBlock].transform.rotation = Quaternion.Euler(0, 270, 0);
+            blockPrefabs[currentBlock].transform.rotation = Quaternion.Euler(0, 270, 0); // Reorients the forward z-axis (blue line) to move the object correctly
+
+            // Debug.Log("Spawning Right");
         }
 
         blockPrefabs[currentBlock].moving = true;
@@ -75,5 +83,12 @@ public class BlockSpawner : MonoBehaviour
         
         blockPrefabs[currentBlock].lastBlock = blockPrefabs[lastBlock];
         blockPrefabs[currentBlock].hangingBlock = blockPrefabs[hangingBlock];
+    }
+
+    public void SpawnerUpdate()
+    {
+        rightSpawn.transform.position = new Vector3(blockPrefabs[currentBlock].transform.position.x + 3.0f, blockPrefabs[currentBlock].transform.position.y, blockPrefabs[currentBlock].transform.position.z);
+        leftSpawn.transform.position = new Vector3(blockPrefabs[currentBlock].transform.position.x, blockPrefabs[currentBlock].transform.position.y, blockPrefabs[currentBlock].transform.position.z + 3.0f);
+        Debug.Log("Updating Spawners");
     }
 }

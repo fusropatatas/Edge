@@ -18,7 +18,10 @@ public class GameManager : MonoBehaviour
             if(spawner.blockPrefabs[spawner.currentBlock] != null)
             {
                 spawner.blockPrefabs[spawner.currentBlock].DropBlock();
+                spawner.SpawnerUpdate();
                 camera.transform.position += new Vector3(0f, 0.2f, 0f);
+
+                spawner.spawnLeft = spawner.spawnLeft ? false : true;
             }
 
             spawner.SpawnBlock();
